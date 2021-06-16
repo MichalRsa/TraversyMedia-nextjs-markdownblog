@@ -18,9 +18,7 @@ export default function Home({ posts }: HomeProps) {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {posts.map((post, index) => {
           console.log(post);
-          return (
-            <Post key={index} post={post as unknown as PostProps["post"]} />
-          );
+          return <Post key={index} post={post} />;
         })}
       </div>
 
@@ -33,7 +31,11 @@ export default function Home({ posts }: HomeProps) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<{
+  props: {
+    posts: HomeProps["posts"];
+  };
+}> {
   const files = fs.readdirSync(path.join("posts"));
 
   const posts = files.map((filename) => {
@@ -44,7 +46,11 @@ export async function getStaticProps() {
       "utf-8"
     );
 
-    const { data: frontmatter } = matter(markdownWithMeta);
+    console.log(markdownWithMeta);
+    const { data: frontmatter }: { data: PostProps["frontmatter"] } =
+      matter(markdownWithMeta);
+
+    // const frontmatter: PostProps["frontmatter"] = data;
 
     return { slug, frontmatter };
   });

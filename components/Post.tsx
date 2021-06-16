@@ -2,21 +2,20 @@ import Link from "next/Link";
 import Image from "next/Image";
 
 export interface PostProps {
-  post: {
-    slug: string;
-    frontmatter: {
-      title: string;
-      date: string;
-      excerpt: string;
-      cover_image: string;
-      category: string;
-      author: string;
-      author_image: string;
-    };
+  slug: string;
+  frontmatter: {
+    title: string;
+    date: string;
+    excerpt: string;
+    cover_image: string;
+    category: string;
+    author: string;
+    author_image: string;
   };
 }
 
-const Post = ({ post }: PostProps) => {
+const Post = ({ post }: { post: PostProps }) => {
+  console.log(post);
   return (
     <div className="w-full px-10 py-6 bg-white rounded-lg shadow-md mt-6">
       <Image
