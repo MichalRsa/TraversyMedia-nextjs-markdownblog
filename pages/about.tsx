@@ -1,7 +1,5 @@
 import Layout, { LayoutProps } from "../components/Layout";
 
-export interface AboutPageProps extends LayoutProps {}
-
 const AboutPage = () => {
   return (
     <Layout title="About DevSpace">
